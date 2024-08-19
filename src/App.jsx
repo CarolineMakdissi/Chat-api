@@ -13,7 +13,7 @@ import SideNav from "./Components/SideNav/SideNav";
 import Footer from "./Components/Footer/Footer";
 
 function App() {
-  const token = localStorage.getItem("token"); // Kontrollera om användaren är inloggad
+  const token = sessionStorage.getItem("token"); // Kontrollera om användaren är inloggad
 
   return (
     <Router>
