@@ -1,0 +1,8 @@
+.message-right {
+  margin-left: auto;
+  max-width: 300px;
+}
+.message-left {
+  margin-right: auto;
+  max-width: 300px;
+}

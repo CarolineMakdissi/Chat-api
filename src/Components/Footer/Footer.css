@@ -1,15 +1,15 @@
-footer {
-    background-color: #000; /* Mörk bakgrund */
-    color: Black; /* Vit text */
+.footer {
+    background-color: #708090; 
+    color: white; 
     text-align: center; /* Centrera texten */
-    padding: 20px; /* Utrymme runt innehållet */
+    padding: 20px; 
     position: fixed; /* Fixerar footern längst ner på sidan */
     bottom: 0;
-    width: 100%; /* Full bredd */
+    width: 100%; 
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3); /* Skugga för att ge djup */
   }
   
-  footer p {
+  .footer p {
     margin: 0; /* Ingen marginal för paragrafen */
     color: black;
   }

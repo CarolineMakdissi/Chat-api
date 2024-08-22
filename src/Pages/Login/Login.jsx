@@ -1,12 +1,13 @@
-import React, { useState } from "react";//Importera useState
+import React, { useState, useContext } from "react";//Importera useState
 import axios from "axios";//Importera axios 
 import "./login.css";//Importera css filen 
 import { useNavigate } from "react-router-dom";//Importera useNavigate
-
+import { AuthContext } from '../../Context/AuthContext'
 const csrfUrl = "https://chatify-api.up.railway.app/csrf";
 const loginUrl = "https://chatify-api.up.railway.app/auth/token";
 
 function Login() {
+  const {  setToken } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -26,13 +27,14 @@ function Login() {
         password: password,
         csrfToken: csrfToken,
       });
+
       const auth = handleLogin.data.token;
       console.log("fetched token", auth);
       sessionStorage.setItem("token", auth);
       sessionStorage.setItem("username", username);
       sessionStorage.setItem("avatar", "https://i.pravatar.cc/200");
-
-      navigate("/Chat");
+      setToken(auth)
+      navigate("/chat");
     } catch (error) {
       console.log(error.response);
       setError(error.response.data.error);

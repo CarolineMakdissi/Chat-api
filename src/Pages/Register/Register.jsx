@@ -4,6 +4,7 @@ import axios from "axios";//Importerar axios
 import "./Register.css";//Importerar css filen
  
 const url = "https://chatify-api.up.railway.app/auth/register";
+const csrfUrl = "https://chatify-api.up.railway.app/csrf";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -17,15 +18,20 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // fetch csrf token
+      const csrfResponse = await axios.patch(csrfUrl);
+      const csrfToken = csrfResponse.data.csrfToken;
+
       const resp = await axios.post(url, {
         username: username,
         email: email,
         password: password,
+        csrfToken: csrfToken
       });
       setSuccess(resp.data.message);
       console.log(resp.data.message);
 
-      navigate('/Login');
+      navigate('/login');
     } catch (error) { 
       console.log(error.response);
       setError(error.response.data.error);
