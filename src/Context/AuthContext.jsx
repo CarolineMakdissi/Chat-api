@@ -1,5 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from "react"; // Importerar createContext och useState från React
 
-const AuthContext = createContext();
+const AuthContext = createContext(); // Skapar ett nytt kontextobjekt för autentisering
 
-export { AuthContext,  };
+export { AuthContext };

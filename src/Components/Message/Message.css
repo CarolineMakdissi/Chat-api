@@ -1,5 +1,5 @@
 .message-bubble {
-  background: #C0C0C0;
+  background: #c0c0c0;
   color: black;
   border-radius: 5px;
   padding: 10px;
@@ -21,7 +21,7 @@
 }
 
 .message-delete-button {
-  background:  #708090;
+  background: #708090;
 }
 
 .message-bubble-text {

@@ -1,13 +1,13 @@
-import React, { useState, useContext } from "react";//Importera useState
-import axios from "axios";//Importera axios 
-import "./Login.css";//Importera css filen 
-import { useNavigate } from "react-router-dom";//Importera useNavigate
-import { AuthContext } from '../../Context/AuthContext'
-const csrfUrl = "https://chatify-api.up.railway.app/csrf";
-const loginUrl = "https://chatify-api.up.railway.app/auth/token";
+import React, { useState, useContext } from "react"; //Importera useState och useContext
+import axios from "axios"; //Importera axios för att göra http förfrågningar
+import "./Login.css"; //Importera css filen
+import { useNavigate } from "react-router-dom"; //Importera useNavigate
+import { AuthContext } from "../../Context/AuthContext"; // Importerar authContext
+const csrfUrl = "https://chatify-api.up.railway.app/csrf"; // URL för att hämta CSRF-token
+const loginUrl = "https://chatify-api.up.railway.app/auth/token"; // URL för att logga in
 
 function Login() {
-  const {  setToken } = useContext(AuthContext);
+  const { setToken } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -18,23 +18,23 @@ function Login() {
     try {
       // fetch csrf token
       const csrfResponse = await axios.patch(csrfUrl);
-      const csrfToken = csrfResponse.data.csrfToken;
+      const csrfToken = csrfResponse.data.csrfToken; // Spara CSRF-token
       console.log("fetched csrf token", csrfToken);
 
-      // Get token by sending username, password and csrf token
+      // Get token genom att skicka användarnamn, lösenord och csrf-token
       const handleLogin = await axios.post(loginUrl, {
         username: username,
         password: password,
         csrfToken: csrfToken,
       });
 
-      const auth = handleLogin.data.token;
+      const auth = handleLogin.data.token; // Spara autentiseringstoken
       console.log("fetched token", auth);
-      sessionStorage.setItem("token", auth);
-      sessionStorage.setItem("username", username);
+      sessionStorage.setItem("token", auth); // Spara token i sessionStorage
+      sessionStorage.setItem("username", username); // Spara användarnamn i sessionStorage
       sessionStorage.setItem("avatar", "https://i.pravatar.cc/100?img=5");
-      setToken(auth)
-      navigate("/chat");
+      setToken(auth); // Uppdatera token i AuthContext
+      navigate("/chat"); // Navigera till chat-sidan
     } catch (error) {
       console.log(error.response);
       setError(error.response.data.error);
@@ -44,6 +44,8 @@ function Login() {
   return (
     <div>
       <form className="login-form" onSubmit={handleToken}>
+        {" "}
+        {/* Formulär som hanterar inloggning, kör handleToken när det skickas */}
         <div>
           <label htmlFor="username">Username</label>
           <input
@@ -59,7 +61,7 @@ function Login() {
             type="password"
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)} // Uppdatera lösenord
           />
         </div>
         <button type="submit">Login</button>
