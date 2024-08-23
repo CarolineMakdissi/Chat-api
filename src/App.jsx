@@ -29,7 +29,7 @@ function App() {
       <Router>
         <div className="app-container">
           {token && <SideNav />} {/* Visa SideNav om användaren är inloggad */}
-          <div className="app-body">
+          <div className={token ? "app-body" : "app-body-no-sidebar"}>
             <Routes>
               {/* Om användaren är inloggad, gå till "/chat". Annars gå till "/login" */}
               <Route

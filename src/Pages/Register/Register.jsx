@@ -1,6 +1,7 @@
 import React, { useState } from "react"; //Importerar useState
 import { useNavigate } from "react-router-dom"; //Importerar useNavigate hook
 import axios from "axios"; //Importerar axios
+import { Link } from "react-router-dom";
 
 
 const url = "https://chatify-api.up.railway.app/auth/register"; // URL för registrerings-API
@@ -70,6 +71,8 @@ function Register() {
             onChange={(e) => setPassword(e.target.value)} // Uppdatera lösenordet
           />
         </div>
+        <Link to="/login">already have an account? log in here</Link>
+        <br /><br />
         <button type="submit">Register</button>
         {message && <p className="message">{message}</p>}{" "}
         {/* Visa framgångsmeddelande om det finns */}

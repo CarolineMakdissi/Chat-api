@@ -3,6 +3,7 @@ import axios from "axios"; //Importera axios för att göra http förfrågningar
 import "./Login.css"; //Importera css filen
 import { useNavigate } from "react-router-dom"; //Importera useNavigate
 import { AuthContext } from "../../Context/AuthContext"; // Importerar authContext
+import { Link } from "react-router-dom";
 const csrfUrl = "https://chatify-api.up.railway.app/csrf"; // URL för att hämta CSRF-token
 const loginUrl = "https://chatify-api.up.railway.app/auth/token"; // URL för att logga in
 
@@ -64,6 +65,8 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)} // Uppdatera lösenord
           />
         </div>
+        <Link to="/register">dont have an account? register on here</Link>
+        <br /><br />
         <button type="submit">Login</button>
         {error && <p className="error">{error}</p>}
       </form>
