@@ -1,8 +1,41 @@
+.message-bubble {
+  background: #C0C0C0;
+  color: black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .message-right {
   margin-left: auto;
   max-width: 300px;
+  width: 80%;
+  padding: 20px;
 }
 .message-left {
   margin-right: auto;
   max-width: 300px;
+  width: 80%;
+  padding: 20px;
+}
+
+.message-delete-button {
+  background:  #708090;
+}
+
+.message-bubble-text {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.message-bubble-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.message-avatar {
+  width: 51px;
+  border-radius: 100%;
 }

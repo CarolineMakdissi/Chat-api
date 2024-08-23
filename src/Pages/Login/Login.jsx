@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";//Importera useState
 import axios from "axios";//Importera axios 
-import "./login.css";//Importera css filen 
+import "./Login.css";//Importera css filen 
 import { useNavigate } from "react-router-dom";//Importera useNavigate
 import { AuthContext } from '../../Context/AuthContext'
 const csrfUrl = "https://chatify-api.up.railway.app/csrf";
@@ -32,7 +32,7 @@ function Login() {
       console.log("fetched token", auth);
       sessionStorage.setItem("token", auth);
       sessionStorage.setItem("username", username);
-      sessionStorage.setItem("avatar", "https://i.pravatar.cc/200");
+      sessionStorage.setItem("avatar", "https://i.pravatar.cc/100?img=5");
       setToken(auth)
       navigate("/chat");
     } catch (error) {

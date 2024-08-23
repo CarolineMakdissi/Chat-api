@@ -10,12 +10,39 @@ const messageUrl = "https://chatify-api.up.railway.app/messages";
 
 const fakeMessages = [
   {
-    id: 3939,
-    text: "Hello, world!",
-    conversationId: "550e8400-e29b-41d4-a716-446655440000",
+    id: "fake-message1",
+    text: "Tja tja, hur mår du?",
+    avatar: "https://i.pravatar.cc/100?img=14",
+    username: "Johnny",
+    conversationId: null,
+    isFake: true,
+  },
+  {
+    id: "fake-message2",
+    text: "Hallå!! Svara då!!",
+    avatar: "https://i.pravatar.cc/100?img=14",
+    username: "Johnny",
+    conversationId: null,
+    isFake: true,
+  },
+  {
+    id: "fake-message3",
+    text: "Sover du eller?! 😴",
+    avatar: "https://i.pravatar.cc/100?img=14",
+    username: "Johnny",
+    conversationId: null,
     isFake: true,
   },
 ];
+
+function getRandomNumber() {
+  return Math.floor(Math.random() * 3); // siffra mellan 0 och 2
+}
+
+// säkra textem
+function sanitizeInput(input) {
+  return input.replace(/[^a-zA-Z0-9 ]/g, "");
+}
 
 function Chat() {
   const { token } = useContext(AuthContext);
@@ -30,7 +57,7 @@ function Chat() {
       const resp = await axios.post(
         messageUrl,
         {
-          text: newMessage,
+          text: sanitizeInput(newMessage),
           converstationId: convId,
         },
         {
@@ -42,7 +69,8 @@ function Chat() {
 
       const latestMessage = resp.data.latestMessage;
       // när den lyckas då lägger vi meddelandet state, dessutom lägger vi en fake som svar
-      const newArray = messages.concat([latestMessage, fakeMessages[0]]);
+      const fakeId = getRandomNumber()
+      const newArray = messages.concat([latestMessage, fakeMessages[fakeId]]);
       setMessages(newArray);
     } catch (error) {
       console.log(error);
@@ -78,7 +106,7 @@ function Chat() {
     }
   }
 
-  async function deleteMessage() {
+  async function deleteMessage(messageId) {
     try {
       await axios.delete(
         `https://chatify-api.up.railway.app/messages/${messageId}`,
@@ -100,7 +128,7 @@ function Chat() {
   }, [token]);
 
   return (
-    <div>
+    <div className="chat-body">
       <div className="message-container">
         {messages.map((message) => (
           <Message
@@ -109,10 +137,12 @@ function Chat() {
             text={message.text}
             isOwner={!message.isFake}
             deleteMessage={deleteMessage}
+            username={message.username}
+            avatar={message.avatar}
           />
         ))}
       </div>
-      <form onSubmit={handleMessage}>
+      <form className="message-input" onSubmit={handleMessage}>
         <input
           type="text"
           value={newMessage}

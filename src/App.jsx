@@ -8,11 +8,10 @@ import {
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import Chat from "./Pages/Chat/Chat";
-import Profile from "./Components/Profile/Profile";
 import SideNav from "./Components/SideNav/SideNav";
-import Footer from "./Components/Footer/Footer";
 import Logout from "./Pages/Logout/Logout";
 import { AuthContext } from "./Context/AuthContext";
+import './App.css';
 
 function App() {
   const savedToken = sessionStorage.getItem("token"); // Kontrollera om användaren är inloggad
@@ -27,6 +26,7 @@ function App() {
       <Router>
         <div className="app-container">
           {token && <SideNav />} {/* Visa SideNav om användaren är inloggad */}
+          <div className="app-body">
           <Routes>
             <Route
               path="/"
@@ -46,13 +46,11 @@ function App() {
               path="/chat"
               element={token ? <Chat /> : <Navigate to="/login" />}
             />
-            <Route
-              path="/profile"
-              element={token ? <Profile /> : <Navigate to="/login" />}
-            />
+            
             <Route path="/logout" element={<Logout />} />
           </Routes>
-          <Footer /> {/*Lägger footer utanför*/}
+          {/* <Footer />  */}
+          </div>
         </div>
       </Router>
     </AuthContext.Provider>
